@@ -1,0 +1,28 @@
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.header,
+.footer {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.header {
+	padding-bottom: 20px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.footer {
+	padding-top: 20px;
+	margin-top: 15px;
+	border-top: 1px solid #e5e5e5;
+}
+
+.header h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 40px;
+}
