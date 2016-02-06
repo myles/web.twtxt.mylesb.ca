@@ -1,6 +1,8 @@
+import os
+
 from flask import Flask
 
-from flask_appconfig import AppConfig
+from flask_appconfig import HerokuConfig
 from flask_bootstrap import Bootstrap
 
 from .frontend import frontend
@@ -9,12 +11,17 @@ from .frontend import frontend
 def create_app(configfile=None):
     app = Flask(__name__)
 
-    AppConfig(app)
+    HerokuConfig(app, configfile)
     Bootstrap(app)
 
     app.register_blueprint(frontend)
     app.config['BOOTSTRAP_SERVE_LOCAL'] = True
+    app.config['EMBEDLY_KEY'] = os.environ.get('EMBEDLY_KEY')
 
     return app
 
-create_app().run(debug=True)
+
+app = create_app()
+
+port = int(os.environ.get("PORT", 5000))
+app.run(host='0.0.0.0', port=port, debug=True)

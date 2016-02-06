@@ -26,7 +26,12 @@
                 {% for url in tweet.urls %}
                     {% if url.type == 'video' %}
                     <div class="panel-embed embed-responsive embed-responsive-16by9">
-                        {{ url.html }}
+                        {{ url.html|safe }}
+                    </div>
+                    {% endif %}
+                    {% if url.type == 'photo' %}
+                    <div class="panel-embed thumbnail">
+                        <img src="{{ url.url }}" alt="{{ url.title }}">
                     </div>
                     {% endif %}
                 {% endfor %}

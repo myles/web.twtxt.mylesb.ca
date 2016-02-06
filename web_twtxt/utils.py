@@ -1,5 +1,7 @@
 import re
 
+from flask import current_app as app
+
 from embedly import Embedly
 from twtxt.parser import parse_iso8601
 
@@ -10,7 +12,7 @@ def get_links(text):
     
     embedly = []
     
-    client = Embedly('')
+    client = Embedly(app.config['EMBEDLY_KEY'])
     
     for url in urls:
         embedly.append(client.oembed(url))
