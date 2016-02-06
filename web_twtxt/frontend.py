@@ -1,7 +1,14 @@
 import logging
 import requests
 
-from flask import Blueprint, render_template, flash, redirect, url_for
+from flask import (
+    Blueprint,
+    render_template,
+    flash,
+    redirect,
+    url_for,
+    current_app as app
+)
 
 from flask_bootstrap import __version__ as FLASK_BOOTSTRAP_VERSION
 
@@ -13,7 +20,7 @@ frontend = Blueprint('frontend', __name__)
 
 @frontend.route('/')
 def index():
-    raw_tweets = requests.get('https://twtxt.mylesb.ca/').text
+    raw_tweets = requests.get(app.config['TWTXT_FEED']).text
     
     tweets = []
     

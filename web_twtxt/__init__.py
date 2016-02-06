@@ -17,6 +17,7 @@ def create_app(configfile=None):
     app.register_blueprint(frontend)
     app.config['BOOTSTRAP_SERVE_LOCAL'] = True
     app.config['EMBEDLY_KEY'] = os.environ.get('EMBEDLY_KEY')
+    app.config['TWTXT_FEED'] = os.environ.get('TWTXT_FEED')
 
     return app
 
