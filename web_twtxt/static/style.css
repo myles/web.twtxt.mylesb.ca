@@ -16,6 +16,7 @@ body {
 }
 
 .footer {
+	text-align: center;
 	padding-top: 20px;
 	margin-top: 15px;
 	border-top: 1px solid #e5e5e5;
@@ -25,4 +26,14 @@ body {
 	margin-top: 0;
 	margin-bottom: 0;
 	line-height: 40px;
+}
+
+.iconic {
+	height: 1.5em;
+	width: 1.5em;
+	vertical-align: middle;
+}
+
+.iconic-heart * {
+	fill: #da3a35;
 }
