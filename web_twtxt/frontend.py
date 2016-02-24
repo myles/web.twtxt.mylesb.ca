@@ -7,6 +7,7 @@ from flask import (
     flash,
     redirect,
     url_for,
+    request,
     current_app as app
 )
 
@@ -20,7 +21,9 @@ frontend = Blueprint('frontend', __name__)
 
 @frontend.route('/')
 def index():
-    raw_tweets = requests.get(app.config['TWTXT_FEED']).text
+    r = requests.get(request.args.get('feed', app.config['TWTXT_FEED']))
+
+    raw_tweet = r.text
     
     tweets = []
     
