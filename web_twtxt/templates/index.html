@@ -25,15 +25,49 @@
             <div class="panel panel-default">
                 <div class="panel-body">{{ tweet.text|urlize(40, true) }}</div>
                 {% for url in tweet.urls %}
+                    {% if url.type == 'photo' %}
+                    <div class="panel-embed panel-embedly thumbnail">
+                        <img src="{{ url.url }}" alt="{{ url.title }}">
+                    </div>
+                    {% endif %}
+                    
                     {% if url.type == 'video' %}
-                    <div class="panel-embed embed-responsive embed-responsive-16by9">
+                    <div class="panel-embed panel-embedly embed-responsive embed-responsive-16by9">
                         {{ url.html|safe }}
                     </div>
                     {% endif %}
-                    {% if url.type == 'photo' %}
-                    <div class="panel-embed thumbnail">
-                        <img src="{{ url.url }}" alt="{{ url.title }}">
+                    
+                    {% if url.type == 'rich' %}
+                    <div class="panel-embed panel-embedly">
+                        {{ url.html|safe }}
                     </div>
+                    {% endif %}
+                    
+                    {% if url.type == 'link' %}
+                    {% if url.thumbnail_url %}
+                    <div class="panel-body panel-embedly media">
+                        <div class="media-left media-middle">
+                            <a href="{{ url.url }}" title="{{ url.title }}">
+                                <img class="media-object" src="{{ url.thumbnail_url }}" alt="{{ url.title }}" height="64px">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="{{ url.url }}" title="{{ url.title }}">
+                                <h4 class="media-heading">{{ url.title }}</h4>
+                            </a>
+                            
+                            <p>{{ url.description }}</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="panel-body panel-embedly">
+                        <a href="{{ url.url }}" title="{{ url.title }}">
+                            <h4 class="media-heading">{{ url.title }}</h4>
+                        </a>
+                        
+                        <p>{{ url.description }}</p>
+                    </div>
+                    {% endif %}
                     {% endif %}
                 {% endfor %}
                 <div class="panel-footer">{{ tweet.timestamp.strftime('%-d %B, %Y at %-I:%M %p') }}</div>

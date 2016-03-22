@@ -28,6 +28,11 @@ body {
 	line-height: 40px;
 }
 
+.panel-embedly {
+  margin-top: 0;
+  border-top: 1px solid #ddd;
+}
+
 .iconic {
 	height: 1.5em;
 	width: 1.5em;
