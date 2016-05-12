@@ -35,5 +35,5 @@ def index():
         except (ValueError, OverflowError) as e:
             logger.debug(e)
 
-    return render_template('index.html', tweets=reversed(tweets), 
+    return render_template('index.html', tweets=tweets.sort(reverse=True),
                            twtxt_nick=twtxt_nick, twtxt_feed=twtxt_feed)
