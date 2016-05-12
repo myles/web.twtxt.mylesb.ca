@@ -1,5 +1,6 @@
 import logging
 import requests
+from operator import itemgetter
 
 from flask import (
     Blueprint,
@@ -35,5 +36,7 @@ def index():
         except (ValueError, OverflowError) as e:
             logger.debug(e)
 
-    return render_template('index.html', tweets=tweets.sort(reverse=True),
+    tweets.sort(key=itemgetter('timestamp'), reverse=True)
+
+    return render_template('index.html', tweets=tweets,
                            twtxt_nick=twtxt_nick, twtxt_feed=twtxt_feed)
