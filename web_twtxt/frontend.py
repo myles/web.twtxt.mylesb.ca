@@ -16,7 +16,14 @@ frontend = Blueprint('frontend', __name__)
 
 @frontend.route('/')
 def index():
-    r = requests.get(request.args.get('feed', app.config['TWTXT_FEED']))
+    if request.args.get('feed') or request.args.get('nick'):
+        twtxt_nick = request.args.get('nick')
+        twtxt_feed = request.args.get('feed')
+    else:
+        twtxt_nick = app.config['TWTXT_NICK']
+        twtxt_feed = app.config['TWTXT_FEED']
+
+    r = requests.get(twtxt_feed)
 
     raw_tweets = r.text
 
@@ -28,4 +35,5 @@ def index():
         except (ValueError, OverflowError) as e:
             logger.debug(e)
 
-    return render_template('index.html', tweets=reversed(tweets))
+    return render_template('index.html', tweets=reversed(tweets), 
+                           twtxt_nick=twtxt_nick, twtxt_feed=twtxt_feed)
